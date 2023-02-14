@@ -1,4 +1,5 @@
 import 'package:conversor_mobile/app/controllers/currency_controller.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -20,6 +21,127 @@ class _CurrencyDataState extends State<CurrencyData> {
   String newmoeda = "Kwanza";
   String oldval = "";
   String newVal = "";
+  TextEditingController moedal_1 = TextEditingController();
+  TextEditingController moedal_2 = TextEditingController();
+  void converter() {
+    String moeda1 = "";
+    String moeda2 = "";
+    double valor1 = 0;
+    double valor2 = 0;
+    moeda1 = moeda;
+    moeda2 = newmoeda;
+    if (moeda1 == "Kwanza") {
+      switch (moeda2) {
+        case "Dolar":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 / 504.3;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Euro":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 / 542.33;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Real":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 / 97.73;
+          moedal_2.text = valor2.toString();
+          break;
+      }
+    } else if (moeda2 == "Kwanza") {
+      switch (moeda1) {
+        case "Dolar":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 504.3;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Euro":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 542.33;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Real":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 97.73;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Kwanza":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1;
+          moedal_2.text = valor2.toString();
+      }
+    } else if (moeda1 == "Dolar") {
+      switch (moeda2) {
+        case "Dolar":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Euro":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 0.93;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Real":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 5.16;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Kwanza":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 504.32;
+          moedal_2.text = valor2.toString();
+          break;
+      }
+    } else if (moeda1 == "Euro") {
+      switch (moeda2) {
+        case "Dolar":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 1.08;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Euro":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Real":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 5.55;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Kwanza":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 542.70;
+          moedal_2.text = valor2.toString();
+          break;
+      }
+    } else if (moeda1 == "Real") {
+      switch (moeda2) {
+        case "Dolar":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 0.19;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Euro":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1* 0.18;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Real":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 ;
+          moedal_2.text = valor2.toString();
+          break;
+        case "Kwanza":
+          valor1 = double.tryParse(moedal_1.text.replaceAll(',', '.')) ?? 1.0;
+          valor2 = valor1 * 97.79;
+          moedal_2.text = valor2.toString();
+          break;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,12 +206,14 @@ class _CurrencyDataState extends State<CurrencyData> {
                   Expanded(
                     flex: 2,
                     child: TextField(
+                      controller: moedal_1,
                       decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amber),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber))),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.amber),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber)),
+                      ),
                     ),
                   ),
                 ],
@@ -139,12 +263,16 @@ class _CurrencyDataState extends State<CurrencyData> {
                   Expanded(
                     flex: 2,
                     child: TextField(
+                      controller: moedal_2,
                       decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.amber),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.amber))),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.amber),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber)),
+                      ),
+                      inputFormatters: [CurrencyTextInputFormatter()],
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ],
@@ -154,7 +282,11 @@ class _CurrencyDataState extends State<CurrencyData> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.amber),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      converter();
+                    });
+                  },
                   child: Text(
                     'CONVERTER',
                     style: TextStyle(color: Colors.white),
